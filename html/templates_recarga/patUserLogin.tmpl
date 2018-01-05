@@ -1,0 +1,137 @@
+<!--
+/*
+    patUserLogin.tmpl
+    (C) 2018 by Jose Solares (jsolares@codevoz.com)
+
+    This file is part of numerocentral.
+
+    numerocentral is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    NumeroCentral is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with NumeroCentral.  If not, see <http://www.gnu.org/licenses/>.
+
+    Login template
+*/
+-->
+<patTemplate:tmpl name="patUserLogin">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+	<title>Numero Central</title>
+	<link rel="stylesheet" type="text/css" href="/login.css"/>
+</head>
+
+<body>
+
+<div align="center">
+<br/>
+<img src="images/logo-small.jpg">
+</div>
+
+
+<div id="content">
+  <div id="centerSection">
+
+    <div class="padder">
+      <div class="padder">
+
+	<form action="{PATUSER_SELF}" method="post">
+		<input type="Hidden" name="{PATUSER_ACTION}" value="login">
+	
+		<table border="0" cellpadding="0" cellspacing="2">
+			<tr>
+				<td colspan="2">
+					<br />
+					<b>Ingrese credenciales para continuar</b>
+				</td>
+			</tr>
+	<patTemplate:tmpl name="errorlist" visibility="hidden">
+			<tr>
+				<td colspan="2">
+					<br />
+					Porfavor corregir los siguiente errores:<br><br>
+					
+					<patTemplate:tmpl name="error" type="condition" conditionvar="error_code">
+	
+						<!-- You may add as many subtemplates as there are error codes in ortder
+							 to customzize output -->
+						<patTemplate:sub condition="1">
+						&middot;&nbsp;Corrija su usuario/contrase&ntilde;a.<br/>
+						</patTemplate:sub>
+	
+						<patTemplate:sub condition="default">
+						&middot;&nbsp;Error: {ERROR_MESSAGE} (#{ERROR_CODE})<br>
+						</patTemplate:sub>
+
+					</patTemplate:tmpl>
+				<br />
+				</td>
+			</tr>
+	</patTemplate:tmpl>
+			<tr><td>&nbsp;</td></tr>
+			<tr>
+				<td align=right>Usuario:&nbsp;</td>
+				<td><input type="Text" name="{PATUSER_USERNAME}" value="{PATUSER_USERNAME_VALUE}"></td>
+			</tr>
+			<tr>
+				<td align=right>Password:&nbsp;</td>
+				<td><input type="Password" name="{PATUSER_PASSWD}" value="{PATUSER_PASSWD_VALUE}"></td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+			<tr>
+				<td colspan="2" align="center"><input type="Submit" value="Ingresar"></td>
+			</tr>
+
+		<tr><td>&nbsp;</td></tr>
+                        <tr>
+                                <td colspan="2" align="center"><big><a href="https://www.numerocentral.com/que-es/"> Qu&eacute; es N&uacute;mero Central?</a></big></td>
+                        </tr>
+
+<tr><td>&nbsp;</td></tr>
+<tr>
+                                <td colspan="2" align="center"><big><a href="https://www.facebook.com/numerocentral/">N&uacute;mero Central en Facebook</a></big></td>
+                        </tr>
+
+
+
+
+		</table>
+
+
+
+
+	</form>
+</div>
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+
+
+  <div id="footer">
+    Copyright Codevoz. Todos los derechos reservados.&nbsp;&nbsp;&nbsp;
+  </div>
+
+</div>
+<br />
+<span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=F5RYVEFLLHhQylBNfBWpmqFxcWWKkWd9lI5fBKLPBrWaOi0JhT6zyJ4gHa1E"></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.godaddy.com/ssl/ssl-certificates.aspx" target="_blank">SSL Cert</a></span>
+</body>
+</html>
+</patTemplate:tmpl>
