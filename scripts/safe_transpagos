@@ -1,0 +1,44 @@
+#!/bin/sh
+#
+#    safe_transpagos
+#    (C) 2018 by Jose Solares (jsolares@codevoz.com)
+#
+#    This file is part of numerocentral.
+#
+#    numerocentral is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    NumeroCentral is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with NumeroCentral.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Keeps the transpagos.pl script running
+#
+
+run_transpagos()
+{
+        while :; do
+                /var/lib/asterisk/agi-bin/transpagos.pl >> /var/log/transpagos.log 2>&1
+                EXITSTATUS=$?
+                echo "Problem with transpagos script on `date`" >> /var/log/transpagos.log
+                echo "Transpagos script ended with exit status $EXITSTATUS" >> /var/log/transpagos.log
+                if [ "$EXITSTATUS" = "0" ]; then
+                        # Properly shutdown....
+                        echo "Transpagos shutdown normally." >> /var/log/transpagos.log
+                        exit 0
+                elif [ $EXITSTATUS -gt 128 ]; then
+                        let EXITSIGNAL=EXITSTATUS-128
+                        echo "Transpagos exited on signal $EXITSIGNAL." >> /var/log/transpagos.log
+                fi
+                echo "Automatically restarting Transpagos script/" >> /var/log/transpagos.log
+                sleep 4
+        done
+}
+
+run_transpagos &
