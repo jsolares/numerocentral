@@ -4374,7 +4374,7 @@ function mmComprar( $id_mm ) {
 				$db -> query ("update saldo set saldo_qtz=saldo_qtz-$total, saldo_minutos=saldo_minutos+$minutos,fecha_ingreso_saldo=now() where uid=$userid");
 				$db -> query ("update saldo set saldo_qtz=saldo_qtz+$total where uid=$id_vendedor");
 
-				$PID = shell_exec("nohup /var/lib/asterisk/agi-bin/venta-email.pl $idventa 2> /dev/null & echo $!");
+				$PID = shell_exec("nohup scripts/venta-email.pl $idventa 2> /dev/null & echo $!");
 	
 				$objResponse -> alert ("Minutos comprados!");	
 				$objResponse -> call ('xajax_mmGetList');
