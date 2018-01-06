@@ -490,7 +490,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19049180-1']);
+  _gaq.push(['_setAccount', 'UA--1']);
   _gaq.push(['_trackPageview']);
 
   (function() {

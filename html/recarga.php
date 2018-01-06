@@ -172,7 +172,7 @@ Codevoz, S.A. Recargas Celular.&nbsp;&nbsp;
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-19049180-1']);
+  _gaq.push(['_setAccount', 'UA--1']);
   _gaq.push(['_trackPageview']);
 
   (function() {

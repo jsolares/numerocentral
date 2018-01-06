@@ -225,7 +225,7 @@ if ($_SERVER["HTTP_X_FORWARDED_FOR"]) {
   </div>
 
 <br />
-<span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=F5RYVEFLLHhQylBNfBWpmqFxcWWKkWd9lI5fBKLPBrWaOi0JhT6zyJ4gHa1E"></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.godaddy.com/ssl/ssl-certificates.aspx" target="_blank">SSL Cert</a></span>
+<span id="siteseal"><script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID="></script><br/><a style="font-family: arial; font-size: 9px" href="http://www.godaddy.com/ssl/ssl-certificates.aspx" target="_blank">SSL Cert</a></span>
 </div>
 </body>
 </html>
