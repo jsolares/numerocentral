@@ -1,0 +1,29 @@
+#!/bin/sh 
+#
+#    mailfax
+#    (C) 2018 by Jose Solares (jsolares@codevoz.com)
+#
+#    This file is part of numerocentral.
+#
+#    numerocentral is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    NumeroCentral is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with NumeroCentral.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Script used to send an email when a fax is received
+#
+
+FAXFILE=$1  
+RECIPIENT=$2 
+FAXSENDER=$3
+DATE=`date`
+
+tiff2ps -2eaz -w 8.3 -h 11.7 $FAXFILE | ps2pdf - | mime-construct --header "From: fax@numerocentral.com (NumeroCentral)" --to $RECIPIENT --subject "Numero Central, Fax de $FAXSENDER" --string "Recibio un Fax del numero $FAXSENDER el $DATE" --attachment fax.pdf --type application/pdf --file - 
