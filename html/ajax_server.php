@@ -772,6 +772,7 @@ $flash .= '<a href="fileproducto-wav.php?file=' . $accountcode . '-' . $keypad .
 	}
 
 	$objResponse -> assign("contenido","innerHTML",$res);
+	$objResponse -> script("callTags();");
 	return $objResponse;
 }
 
