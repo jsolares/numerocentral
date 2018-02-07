@@ -395,7 +395,7 @@ CREATE TABLE `ivr_option` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accountcode` varchar(10) NOT NULL,
   `keypad` smallint(6) DEFAULT NULL,
-  `number` varchar(10) NOT NULL DEFAULT '',
+  `number` varchar(30) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7345 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
