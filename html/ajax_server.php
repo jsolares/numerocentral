@@ -627,7 +627,7 @@ $flash .= '<a href="fileproducto-wav-oo.php?file=' . $accountcode . '-menu" clas
 			if ( $db -> f ("qty") < $max1exten ) {
 				$res .= "<form id=\"ivrOptions\" name=\"ivrOptions\" action=\"javascript:void(null);\" onsubmit='xajax_ivrOptAdd(xajax.getFormValues(\"ivrOptions\"))'>";
 				$res .= "<input type=hidden name=extension value=0/>";
-				$res .= 'Tel&eacute;fono: <input type=text size=10 name="numero"/><input type=submit value="Agregar extensi&oacute;n"/></form>';
+				$res .= 'Tel&eacute;fono: <input type=tags size=35 name="numero" id="numero"/><input type=submit value="Agregar extensi&oacute;n"/></form>';
 			}
 
 			$db -> query ( "select * from ivr_option where accountcode = '$accountcode' and keypad < 10 order by keypad");
@@ -673,7 +673,7 @@ $flash .= '<a href="fileproducto-wav-oo.php?file=' . $accountcode . '-menu" clas
 			if ( $planid == 5 || $planid == 6 ) {
 				if ( $db -> f ("qty") < $maxexten ) {
 					$res .= "<form id=\"ivrExtensions\" name=\"ivrExtensions\" action=\"javascript:void(null);\" onsubmit='xajax_ivrOptAdd(xajax.getFormValues(\"ivrExtensions\"))'>";
-					$res .= 'Extensi&oacute;n: <input type=text size=10 name="extension"/>  Tel&eacute;fono: <input type=text size=10 name="numero"/><input type=submit value="Agregar extensi&oacute;n"/></form>';
+					$res .= 'Extensi&oacute;n: <input type=text size=10 name="extension"/>  Tel&eacute;fono: <input type=tags size=35 name="numero"/><input type=submit value="Agregar extensi&oacute;n"/></form>';
 				}
 			}
 
@@ -878,14 +878,33 @@ function ivrOptAdd( $form ) {
 	$extension = trim($form['extension']);
 
 	$numero = trim($form['numero']);
-	if ( !is_numeric($numero) ) {
-		$objResponse -> script("alert('La opci\u00f3n ingresada no es numerica, debe de ser un n\u00famero telef\u00f3nico de 8 d\u00edgitos.');");
-		return $objResponse;
-	}
-	
-	if ( strlen($numero) != 8 ) {
-		$objResponse -> script("alert('La opci\u00f3n ingresada debe de ser un n\u00famero telef\u00f3nico de 8 d\u00edgitos.');");
-		return $objResponse;
+	$numeros = explode(",", $numero);
+
+	if (count($numeros) > 1 ) {
+		if (count($numeros) > 3) {
+			$objResponse -> script("alert('Unicamente se permiten tres n\u00fameros telef\u00f3nicos.');");
+		}
+		foreach($numeros as $num) {
+			if ( !is_numeric($num) ) {
+				$objResponse -> script("alert('La opci\u00f3n ingresada no es numerica, debe de ser un n\u00famero telef\u00f3nico de 8 d\u00edgitos.');");
+				return $objResponse;
+			}
+
+			if ( strlen($num) != 8 ) {
+				$objResponse -> script("alert('La opci\u00f3n ingresada debe de ser un n\u00famero telef\u00f3nico de 8 d\u00edgitos.');");
+				return $objResponse;
+			}
+		}
+	} else {
+		if ( !is_numeric($numero) ) {
+			$objResponse -> script("alert('La opci\u00f3n ingresada no es numerica, debe de ser un n\u00famero telef\u00f3nico de 8 d\u00edgitos.');");
+			return $objResponse;
+		}
+
+		if ( strlen($numero) != 8 ) {
+			$objResponse -> script("alert('La opci\u00f3n ingresada debe de ser un n\u00famero telef\u00f3nico de 8 d\u00edgitos.');");
+			return $objResponse;
+		}
 	}
 
 	if ( $extension == 0 ) {
@@ -899,7 +918,7 @@ function ivrOptAdd( $form ) {
 			return $objResponse;
 		} else {
 			if ( $qty > 0 ) { $keypad++; }
-			$db -> query ( "insert into ivr_option values ( null, '$accountcode', $keypad, $numero)");
+			$db -> query ( "insert into ivr_option values ( null, '$accountcode', $keypad, '$numero')");
 		}
 	} else {
 		if ( strlen($extension) != 4 ) {
@@ -939,8 +958,8 @@ function ivrOptAdd( $form ) {
 			$id_vendedor = $db -> f ("id_vendedor");
 		}
 
-		$db -> query ("insert into ivr_option values ( null, '$accountcode', $extension, $numero )");
-		$db -> query ("insert into users values ( null, '$accountcode-$extension',md5('$numero'),'','$extension','$accountcode-$extension',13, NULL, now(), NULL, $id_vendedor, 0, 0, '', 0, 0 )");
+		$db -> query ("insert into ivr_option values ( null, '$accountcode', $extension, '$numero' )");
+		$db -> query ("insert into users values ( null, '$accountcode-$extension',md5('$numero'),'','$extension','$accountcode-$extension',13, NULL, now(), NULL, $id_vendedor, 0, 0, '', 0, 0, 0 )");
 	}
 	return getNums();
 }

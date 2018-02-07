@@ -165,6 +165,11 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'
 	<script type="text/javascript">
 		$j = jQuery.noConflict();
 
+		function callTags() {
+			let $ts = s => [].slice.call(document.querySelectorAll(s));
+			$ts('input[type="tags"]').forEach(tagsInput);
+		}
+
 		function clearOptions(FormName, SelectName) {
 			document.forms[FormName].elements[SelectName].options.length = 0;
 		}
