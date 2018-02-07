@@ -377,7 +377,7 @@ if (( $isivr eq '1') && $manual eq '0' ) {
 
 			$AGI -> verbose ($ivr_keypad . ":" . $ivr_number . " - " . $callerid . " - " . $id_plan) ;
 
-			if ( $ivr_number eq $callerid ) {
+			if ( $ivr_number =~ /$callerid/ ) {
 				$ismine = 1;
 			}
 			$myphones[$i++] = $number;
@@ -390,7 +390,9 @@ if (( $isivr eq '1') && $manual eq '0' ) {
 		if ( $id_plan eq '16' ) {
 			if ( $ismine eq '0' ) {
 				if ( ! $ivr_options{0} eq '' ) {
-					$dialstr = "DAHDI/g1/" . $ivr_options{0} . ",60,$mohtype";
+					$dialstr = "DAHDI/g1/" . $ivr_options{0};
+					$dialstr =~ s/,/&DAHDI\/g1\//g;
+					$dialstr .= ",60,$mohtype";
 					if ( $screen eq '1' ) {
 						$dialstr .= "M(screen^$callerid^$accountcode)";
 					}
@@ -486,7 +488,9 @@ if (( $isivr eq '1') && $manual eq '0' ) {
 								while ( $tryproducto < 3 ) {
 									$option_producto  = $AGI -> get_data("$productoplan",4000,1);
 									if ( $option_producto eq '0' ) {
-										$dialstr = "DAHDI/g1/" . $ivr_options{$option_ivr} . ",60,$mohtype";
+										$dialstr = "DAHDI/g1/" . $ivr_options{$option_ivr};
+										$dialstr =~ s/,/&DAHDI\/g1\//g;
+										$dialstr .= ",60,$mohtype";
 										if ( $screen eq '1' ) {
 											$dialstr .= "M(screen^$callerid^$accountcode)";
 										}
@@ -515,7 +519,9 @@ if (( $isivr eq '1') && $manual eq '0' ) {
 							}
 		
 						} else {
-							$dialstr = "DAHDI/g1/" . $ivr_options{$option_ivr} . ",60,$mohtype";
+							$dialstr = "DAHDI/g1/" . $ivr_options{$option_ivr};
+							$dialstr =~ s/,/DAHDI\/g1\//g;
+							$dialstr .= ",60,$mohtype";
 							if ( $screen eq '1' ) {
 								$dialstr .= "M(screen^$callerid^$accountcode)";
 							}
@@ -567,7 +573,9 @@ if (( $isivr eq '1') && $manual eq '0' ) {
 								$option_ivr = 9;
 							}
 						
-							$dialstr = "DAHDI/g1/" . $ivr_options{$option_ivr} . ",60,$mohtype";
+							$dialstr = "DAHDI/g1/" . $ivr_options{$option_ivr};
+							$dialstr =~ s/,/DAHDI\/g1\//g;
+							$dialstr .= ",60,$mohtype";
 							if ( $screen eq '1' ) {
 								$dialstr .= "M(screen^$callerid^$accountcode)";
 							}
