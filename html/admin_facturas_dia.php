@@ -30,11 +30,11 @@ $userid = $user->requireAuthentication( "displayLogin" );
 getpost_ifset(array("fecha"));
 
 $fecha_db = trim($fecha);
-$fecha_db = mysql_real_escape_string($fecha_db);
+$fecha_db = mysqli_real_escape_string($fecha_db);
 $fecha = $fecha_db;
 $mes = array( 1 => "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 $db -> query ( "select id_plan, pagos.accountcode, date(fecha_pago) as fecha_pago, date(fecha_aplica) as fecha_aplica, forma_pago, banco, documento, pagos.monto, pagos.minutos, motivo_pago, nit from pagos, users where users.accountcode = pagos.accountcode and date(fecha_ingreso) = '$fecha' and facturar =1 and nit <> \"\" and banco <> 12 and factura not regexp '^[0-9]+$';");
 
 header('Vary: User-Agent');

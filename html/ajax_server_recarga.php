@@ -40,8 +40,8 @@ include 'prepend.php';
 
 $userid = $user->requireAuthentication( "" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
-$db2 = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
+$db2 = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 
 $mes = array( 1 => "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" );
 

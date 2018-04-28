@@ -26,7 +26,7 @@ include 'prepend_admin.php';
 
 $userid = $user->requireAuthentication( "displayLogin" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 $db -> query ( "select uid, email, users.name, accountcode, nit, monto, plans.detallefac as descr, id_plan from users, plans where nit <> \"\" and id_plan = plans.id");
 
 $fecha = date("Ymd");

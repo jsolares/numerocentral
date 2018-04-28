@@ -11,7 +11,7 @@
 
 
 	// change the data-source-name to fit your needs - see documentation at http://pear.php.net
-	$dsn	=	"mysql://root@localhost/numerocentral";
+	$dsn	=	"mysqli://root@localhost/numerocentral";
 	
 	//	patTemplate is used for login screen
 	include_once( "patTemplate.php" );

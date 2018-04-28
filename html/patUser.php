@@ -3411,7 +3411,6 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 
 			case	"exact":
 			case	"=":
-			default:
 				$statement	=	$field."='".$value."'";
 				break;
 
@@ -3649,7 +3648,7 @@ define( "patUSER_NO_DB_RESULT", 2000 );
 	function	getPHPVersion()
 	{
 		$regs		=	array();
-		if( ereg( "^([0-9])\.([0-9])", phpversion(), $regs ) )
+		if( preg_match( "/^([0-9])\.([0-9])/", phpversion(), $regs ) )
 		{
 			$version	=	(float)( $regs[1] . "." . $regs[2] );
 		}

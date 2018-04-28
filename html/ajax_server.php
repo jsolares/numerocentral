@@ -41,8 +41,8 @@ include 'prepend.php';
 
 $userid = $user->requireAuthentication( "" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
-$db2 = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "nc", "joseso");
+$db2 = new DB_Sql("mysqli", "localhost", "numerocentral", "nc", "joseso");
 
 $db->query("SET CHARACTER SET 'utf8'");
 $db2->query("SET CHARACTER SET 'utf8'");
@@ -2011,9 +2011,9 @@ function escape ($value) {
 if (get_magic_quotes_gpc()) {
 $value = stripslashes($value);
 }
-$newValue = @mysql_real_escape_string($value);
+$newValue = @mysqli_real_escape_string($value);
 if(FALSE === $newValue) {
-$newValue = @mysql_escape_string($value);
+$newValue = @mysqli_escape_string($value);
 }
 return $newValue;
 } 

@@ -11,7 +11,7 @@
 
 
 	// change the data-source-name to fit your needs - see documentation at http://pear.php.net
-	$dsn	=	"mysql://root@localhost/numerocentral";
+	$dsn	=	"mysqli://nc:joseso@localhost/numerocentral";
 	
 	//	patTemplate is used for login screen
 	include_once( "patTemplate.php" );
@@ -32,7 +32,7 @@
 	
 
 	// either set db-object...
-	$authDbc 	=&	DB::connect( $dsn );
+	$authDbc 	=	DB::connect( $dsn );
 	if( DB::isError( $authDbc ) )
 	{
 		echo "<b>Database connection failed</b><br>";

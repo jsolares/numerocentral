@@ -40,8 +40,8 @@ include 'prepend_admin.php';
 
 $userid = $user->requireAuthentication( "" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
-$db2 = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
+$db2 = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 
 $vence = "Admin";
 
@@ -410,9 +410,9 @@ function escape ($value) {
 if (get_magic_quotes_gpc()) {
 $value = stripslashes($value);
 }
-$newValue = @mysql_real_escape_string($value);
+$newValue = @mysqli_real_escape_string($value);
 if(FALSE === $newValue) {
-$newValue = @mysql_escape_string($value);
+$newValue = @mysqli_escape_string($value);
 }
 return $newValue;
 } 

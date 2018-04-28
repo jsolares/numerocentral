@@ -48,7 +48,7 @@ include 'db.inc.php';
 getpost_ifset ( ("ivr") );
 $userid = $user->requireAuthentication( "displayLogin" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 //$db -> query ( "select accountcode, saldo_minutos from users where uid = $userid" );
 $db -> query ( "select id_plan, accountcode, saldo_minutos, valid_days - datediff(now(), fecha_ingreso_saldo) as vence from users, plans, saldo where id_plan = plans.id and users.uid = saldo.uid and users.uid = $userid" );
 $db -> next_record();

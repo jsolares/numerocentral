@@ -26,7 +26,7 @@ include 'prepend_admin.php';
 
 $userid = $user->requireAuthentication( "displayLogin" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 $db -> query ( "select accountcode from users where uid = $userid" );
 $db -> next_record();
 
@@ -34,7 +34,7 @@ $file = $_FILES['facturapdf']['tmp_name'];
 
 getpost_ifset( array("accountcode", "id_pago", "fecha_aplica") );
 
-$pago = mysql_real_escape_string($id_pago);
+$pago = mysqli_real_escape_string($id_pago);
 $db -> query("select factura from pagos where id_pago=$pago");
 $db -> next_record();
 $factura = $db -> f ("factura");

@@ -25,7 +25,7 @@ include 'prepend.php';
 
 $userid = $user->requireAuthentication( "displayLogin" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 $db -> query ( "select accountcode, id_plan, supervisa from users where uid = $userid" );
 $db -> next_record();
 $accountcode = $db -> f ("accountcode");

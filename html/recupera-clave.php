@@ -54,7 +54,7 @@
 <?php
 include 'db.inc.php';
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 
 getpost_ifset(array("email","numero","token","clave","verifica"));
 

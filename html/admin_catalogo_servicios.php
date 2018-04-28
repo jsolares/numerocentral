@@ -27,7 +27,7 @@ include 'prepend_admin.php';
 
 $userid = $user->requireAuthentication( "displayLogin" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 $db -> query ( "select id, detallefac, abreviacion, 'N', 'N', price, 1 from plans;");
 
 header('Vary: User-Agent');

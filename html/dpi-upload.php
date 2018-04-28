@@ -26,7 +26,7 @@ include 'prepend_admin.php';
 
 $userid = $user->requireAuthentication( "displayLogin" );
 
-$db = new DB_Sql("mysql", "localhost", "numerocentral", "root", "");
+$db = new DB_Sql("mysqli", "localhost", "numerocentral", "root", "");
 
 $file = $_FILES['dpipdf']['tmp_name'];
 
